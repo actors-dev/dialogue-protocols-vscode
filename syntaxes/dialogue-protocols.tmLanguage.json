@@ -1,0 +1,62 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Dialogue Protocols",
+	"patterns": [
+		{ "include": "#packageName" },
+		{ "include": "#interface" },
+		{ "include": "#message" }
+	],
+	"repository": {
+        "packageName": {
+			"name": "keyword.other.package_name",
+			"contentName": "entity.name.section.package_name",
+			"begin": "package\\s+",
+			"end": "\n|;"
+		},
+		"interface": {
+			"begin": "(interface)\\s+(\\w+)\\s*({)",
+			"end": "(})",
+			"beginCaptures": {
+				"1": {"name": "keyword.other.interface"},
+				"2": {"name": "entity.name.type.interface"},
+				"3": {"name": "meta.brace.curly.dpl"}
+			},
+			"endCaptures": {
+				"1": {"name": "meta.brace.curly.dpl"}
+			},
+			"patterns": [
+				{"include": "#interface"},
+				{"include": "#message"},
+				{
+					"match": "(<-)\\s*((?:\\w|::)+)",
+					"captures": {
+						"1": {"name": "keyword.operator.accepts"},
+						"2": {"name": "entity.name.type"}
+					}
+				}
+			]
+		},
+		"message": {
+			"begin": "(message)\\s+(\\w+)\\s*({)",
+			"end": "(})",
+			"beginCaptures": {
+				"1": {"name": "keyword.other.message"},
+				"2": {"name": "entity.name.type.message"},
+				"3": {"name": "meta.brace.curly.dpl"}
+			},
+			"endCaptures": { "1": {"name": "meta.brace.curly.dpl" } },
+			"patterns": [
+				{"include": "#interface"},
+				{"include": "#message"},
+				{
+					"match": "(\\w+):\\s*((?:\\w|::)+)",
+					"captures": {
+						"1": {"name": "variable.other.message_property"},
+						"2": {"name": "entity.name.type"}
+					}
+				}
+			]
+		}
+	},
+	"scopeName": "source.dpl"
+}

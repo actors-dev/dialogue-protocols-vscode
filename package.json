@@ -1,0 +1,27 @@
+{
+    "name": "dialogue-protocols",
+    "publisher": "actors-dev",
+    "repository": "git@github.com:actors-dev/dialogue-protocols-vscode.git",
+    "displayName": "Dialogue Protocols (actors.dev)",
+    "description": "Syntax highlighting for dialogue protocols",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.51.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "dialogue-protocols",
+            "aliases": ["Dialogue Protocols", "dialogue-proto", "dpl"],
+            "extensions": ["dpl"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "dialogue-protocols",
+            "scopeName": "source.dpl",
+            "path": "./syntaxes/dialogue-protocols.tmLanguage.json"
+        }]
+    }
+}
