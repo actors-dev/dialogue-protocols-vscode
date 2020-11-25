@@ -4,21 +4,21 @@
 	"patterns": [
 		{ "include": "#packageName" },
 		{ "include": "#interface" },
-		{ "include": "#message" }
+		{ "include": "#struct" }
 	],
 	"repository": {
         "packageName": {
-			"name": "keyword.other.package_name",
-			"contentName": "entity.name.section.package_name",
-			"begin": "package\\s+",
-			"end": "\n|;"
+			"name": "keyword.other.package_name.dpl",
+			"contentName": "string.quoted.double.package_name.dpl",
+			"begin": "package\\s+\"",
+			"end": "\""
 		},
 		"interface": {
 			"begin": "(interface)\\s+(\\w+)\\s*({)",
 			"end": "(})",
 			"beginCaptures": {
-				"1": {"name": "keyword.other.interface"},
-				"2": {"name": "entity.name.type.interface"},
+				"1": {"name": "keyword.other.interface.dpl"},
+				"2": {"name": "entity.name.type.interface.dpl"},
 				"3": {"name": "meta.brace.curly.dpl"}
 			},
 			"endCaptures": {
@@ -26,33 +26,40 @@
 			},
 			"patterns": [
 				{"include": "#interface"},
-				{"include": "#message"},
+				{"include": "#struct"},
 				{
-					"match": "(<-)\\s*((?:\\w|::)+)",
+					"match": "(<-)\\s*(\\w+)\\s+((?:\\w|::)+)(.*)",
 					"captures": {
-						"1": {"name": "keyword.operator.accepts"},
-						"2": {"name": "entity.name.type"}
+						"1": {"name": "keyword.operator.accepts.dpl"},
+						"2": {"name": "entity.name.function.struct.dpl"},
+						"3": {"name": "entity.name.type.dpl"},
+						"4": {
+							"patterns": [{
+								"match": "@\\w+",
+								"name": "storage.modifier.accepts.attribute.dpl"
+							}]
+						}
 					}
 				}
 			]
 		},
-		"message": {
-			"begin": "(message)\\s+(\\w+)\\s*({)",
+		"struct": {
+			"begin": "(struct)\\s+(\\w+)\\s*({)",
 			"end": "(})",
 			"beginCaptures": {
-				"1": {"name": "keyword.other.message"},
-				"2": {"name": "entity.name.type.message"},
+				"1": {"name": "keyword.other.struct.dpl"},
+				"2": {"name": "entity.name.type.struct.dpl"},
 				"3": {"name": "meta.brace.curly.dpl"}
 			},
 			"endCaptures": { "1": {"name": "meta.brace.curly.dpl" } },
 			"patterns": [
 				{"include": "#interface"},
-				{"include": "#message"},
+				{"include": "#struct"},
 				{
 					"match": "(\\w+):\\s*((?:\\w|::)+)",
 					"captures": {
-						"1": {"name": "variable.other.message_property"},
-						"2": {"name": "entity.name.type"}
+						"1": {"name": "variable.other.struct.property.dpl"},
+						"2": {"name": "entity.name.type.dpl"}
 					}
 				}
 			]
