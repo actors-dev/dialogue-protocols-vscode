@@ -2,65 +2,193 @@
 	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
 	"name": "Dialogue Protocols",
 	"patterns": [
-		{ "include": "#packageName" },
-		{ "include": "#interface" },
-		{ "include": "#struct" }
+		{
+			"include": "#comment"
+		},
+		{
+			"include": "#packageName"
+		},
+		{
+			"include": "#interface"
+		},
+		{
+			"include": "#struct"
+		},
+		{
+			"include": "#enum"
+		},
+		{
+			"include": "#using"
+		}
 	],
 	"repository": {
-        "packageName": {
+		"using": {
+			"match": "(using)\\s+(\\w+)\\s*=\\s*((?:\\w|::)+)",
+			"captures": {
+				"1": {
+					"name": "keyword.other.using.dpl"
+				},
+				"2": {
+					"name": "entity.name.type.dpl"
+				},
+				"3": {
+					"name": "entity.name.type.dpl"
+				}
+			}
+		},
+		"comment": {
+			"match": "//.*",
+			"name": "comment.line.double-slash"
+		},
+		"packageName": {
 			"name": "keyword.other.package_name.dpl",
 			"contentName": "string.quoted.double.package_name.dpl",
 			"begin": "package\\s+\"",
 			"end": "\""
 		},
+		"enum": {
+			"begin": "(enum)\\s+(\\w+)\\s*({)",
+			"end": "(})",
+			"beginCaptures": {
+				"1": {
+					"name": "keyword.other.enum.dpl"
+				},
+				"2": {
+					"name": "entity.name.type.enum.dpl"
+				},
+				"3": {
+					"name": "meta.brace.curly.dpl"
+				}
+			},
+			"endCaptures": {
+				"1": {
+					"name": "meta.brace.curly.dpl"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#comment"
+				},
+				{
+					"begin": "(\\w+)\\s*(\\{)",
+					"end": "(\\})",
+					"beginCaptures": {
+						"1": {
+							"name": "entity.name.type.enum_variant.dpl"
+						},
+						"2": {
+							"name": "meta.brace.curly.dpl"
+						}
+					},
+					"endCaptures": {
+						"1": {
+							"name": "meta.brace.curly.dpl"
+						}
+					},
+					"patterns": [
+						{
+							"include": "#comment"
+						},
+						{
+							"include": "#property_definition"
+						}
+					]
+				},
+				{
+					"match": "(\\w+)",
+					"name": "entity.name.type.enum_variant.dpl"
+				}
+			]
+		},
 		"interface": {
 			"begin": "(interface)\\s+(\\w+)\\s*({)",
 			"end": "(})",
 			"beginCaptures": {
-				"1": {"name": "keyword.other.interface.dpl"},
-				"2": {"name": "entity.name.type.interface.dpl"},
-				"3": {"name": "meta.brace.curly.dpl"}
+				"1": {
+					"name": "keyword.other.interface.dpl"
+				},
+				"2": {
+					"name": "entity.name.type.interface.dpl"
+				},
+				"3": {
+					"name": "meta.brace.curly.dpl"
+				}
 			},
 			"endCaptures": {
-				"1": {"name": "meta.brace.curly.dpl"}
+				"1": {
+					"name": "meta.brace.curly.dpl"
+				}
 			},
 			"patterns": [
-				{"include": "#interface"},
-				{"include": "#struct"},
+				{
+					"include": "#comment"
+				},
+				{
+					"include": "#interface"
+				},
+				{
+					"include": "#struct"
+				},
 				{
 					"match": "(<-)\\s*(\\w+)\\s+((?:\\w|::)+)(.*)",
 					"captures": {
-						"1": {"name": "keyword.operator.accepts.dpl"},
-						"2": {"name": "entity.name.function.struct.dpl"},
-						"3": {"name": "entity.name.type.dpl"},
+						"1": {
+							"name": "keyword.operator.accepts.dpl"
+						},
+						"2": {
+							"name": "entity.name.function.struct.dpl"
+						},
+						"3": {
+							"name": "entity.name.type.dpl"
+						},
 						"4": {
-							"patterns": [{
-								"match": "@\\w+",
-								"name": "storage.modifier.accepts.attribute.dpl"
-							}]
+							"patterns": [
+								{
+									"match": "@\\w+",
+									"name": "storage.modifier.accepts.attribute.dpl"
+								}
+							]
 						}
 					}
 				}
 			]
 		},
+		"property_definition": {
+			"match": "(\\w+):\\s*((?:\\w|::)+)",
+			"captures": {
+				"1": {
+					"name": "variable.other.struct.property.dpl"
+				},
+				"2": {
+					"name": "entity.name.type.dpl"
+				}
+			}
+		},
 		"struct": {
 			"begin": "(struct)\\s+(\\w+)\\s*({)",
 			"end": "(})",
 			"beginCaptures": {
-				"1": {"name": "keyword.other.struct.dpl"},
-				"2": {"name": "entity.name.type.struct.dpl"},
-				"3": {"name": "meta.brace.curly.dpl"}
+				"1": {
+					"name": "keyword.other.struct.dpl"
+				},
+				"2": {
+					"name": "entity.name.type.struct.dpl"
+				},
+				"3": {
+					"name": "meta.brace.curly.dpl"
+				}
 			},
-			"endCaptures": { "1": {"name": "meta.brace.curly.dpl" } },
+			"endCaptures": {
+				"1": {
+					"name": "meta.brace.curly.dpl"
+				}
+			},
 			"patterns": [
-				{"include": "#interface"},
-				{"include": "#struct"},
 				{
-					"match": "(\\w+):\\s*((?:\\w|::)+)",
-					"captures": {
-						"1": {"name": "variable.other.struct.property.dpl"},
-						"2": {"name": "entity.name.type.dpl"}
-					}
+					"include": "#comment"
+				},
+				{
+					"include": "#property_definition"
 				}
 			]
 		}
