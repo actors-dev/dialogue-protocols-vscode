@@ -44,7 +44,7 @@
 			"end": "\""
 		},
 		"enum": {
-			"begin": "(enum)\\s+(\\w+)\\s*({)",
+			"begin": "(enum)\\s+(\\w+)(?:<(\\w)(?:,\\s*(\\w))*>)?\\s*({)",
 			"end": "(})",
 			"beginCaptures": {
 				"1": {
@@ -54,6 +54,12 @@
 					"name": "entity.name.type.enum.dpl"
 				},
 				"3": {
+					"name": "entity.name.type.generic.dpl"
+				},
+				"4": {
+					"name": "entity.name.type.generic.dpl"
+				},
+				"5": {
 					"name": "meta.brace.curly.dpl"
 				}
 			},
@@ -98,7 +104,7 @@
 			]
 		},
 		"interface": {
-			"begin": "(interface)\\s+(\\w+)\\s*({)",
+			"begin": "(interface)\\s+(\\w+)(?:<(\\w)(?:,\\s*(\\w))*>)?\\s*({)",
 			"end": "(})",
 			"beginCaptures": {
 				"1": {
@@ -108,6 +114,12 @@
 					"name": "entity.name.type.interface.dpl"
 				},
 				"3": {
+					"name": "entity.name.type.generic.dpl"
+				},
+				"4": {
+					"name": "entity.name.type.generic.dpl"
+				},
+				"5": {
 					"name": "meta.brace.curly.dpl"
 				}
 			},
@@ -178,7 +190,7 @@
 			]
 		},
 		"struct": {
-			"begin": "(struct)\\s+(\\w+)\\s*({)",
+			"begin": "(struct)\\s+(\\w+)(?:<(\\w)(?:,\\s*(\\w))*>)?\\s*({)",
 			"end": "(})",
 			"beginCaptures": {
 				"1": {
@@ -188,6 +200,12 @@
 					"name": "entity.name.type.struct.dpl"
 				},
 				"3": {
+					"name": "entity.name.type.generic.dpl"
+				},
+				"4": {
+					"name": "entity.name.type.generic.dpl"
+				},
+				"5": {
 					"name": "meta.brace.curly.dpl"
 				}
 			},
