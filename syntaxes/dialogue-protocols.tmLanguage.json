@@ -148,12 +148,15 @@
 			]
 		},
 		"property_definition": {
-			"match": "(\\w+):\\s*((?:\\w|::)+)",
+			"match": "(\\d+)\\s*(\\w+):\\s*((?:\\w|::)+)",
 			"captures": {
 				"1": {
-					"name": "variable.other.struct.property.dpl"
+					"name": "variable.other.struct.property_idx.dpl"
 				},
 				"2": {
+					"name": "variable.other.struct.property.dpl"
+				},
+				"3": {
 					"name": "entity.name.type.dpl"
 				}
 			}
