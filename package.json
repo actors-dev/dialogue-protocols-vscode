@@ -4,7 +4,7 @@
     "repository": "git@github.com:actors-dev/dialogue-protocols-vscode.git",
     "displayName": "Dialogue Protocols (actors.dev)",
     "description": "Syntax highlighting for dialogue protocols",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "engines": {
         "vscode": "^1.51.0"
     },
