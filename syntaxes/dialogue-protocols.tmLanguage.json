@@ -9,16 +9,7 @@
 			"include": "#packageName"
 		},
 		{
-			"include": "#interface"
-		},
-		{
-			"include": "#struct"
-		},
-		{
-			"include": "#enum"
-		},
-		{
-			"include": "#using"
+			"include": "#definition"
 		}
 	],
 	"repository": {
@@ -130,10 +121,7 @@
 					"include": "#comment"
 				},
 				{
-					"include": "#interface"
-				},
-				{
-					"include": "#struct"
+					"include": "#definition"
 				},
 				{
 					"match": "(<-)\\s*(\\w+)\\s+((?:\\w|::)+)(.*)",
@@ -170,6 +158,22 @@
 				}
 			}
 		},
+		"definition": {
+			"patterns": [
+				{
+					"include": "#using"
+				},
+				{
+					"include": "#interface"
+				},
+				{
+					"include": "#struct"
+				},
+				{
+					"include": "#enum"
+				}
+			]
+		},
 		"struct": {
 			"begin": "(struct)\\s+(\\w+)\\s*({)",
 			"end": "(})",
@@ -195,6 +199,9 @@
 				},
 				{
 					"include": "#property_definition"
+				},
+				{
+					"include": "#definition"
 				}
 			]
 		}
